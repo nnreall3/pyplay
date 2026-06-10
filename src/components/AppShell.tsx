@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, BookOpen, Terminal, User, Moon, Sun, Flame, Trophy } from "lucide-react";
+import { Home, BookOpen, Terminal, User, Moon, Sun, Flame, Trophy, Rocket, BookA } from "lucide-react";
 import type { ReactNode } from "react";
 import { useTheme } from "@/lib/theme";
 import { useProgress } from "@/lib/progress";
@@ -7,7 +7,9 @@ import { useProgress } from "@/lib/progress";
 const NAV = [
   { to: "/", label: "الرئيسية", icon: Home },
   { to: "/modules", label: "المسارات", icon: BookOpen },
+  { to: "/projects", label: "مشاريع", icon: Rocket },
   { to: "/playground", label: "المختبر", icon: Terminal },
+  { to: "/glossary", label: "المعجم", icon: BookA },
   { to: "/profile", label: "حسابي", icon: User },
 ];
 
@@ -24,7 +26,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <div className="grid h-8 w-8 place-items-center rounded-lg gradient-hero shadow-glow">
               <span className="font-mono text-sm font-bold text-primary-foreground">Py</span>
             </div>
-            <span className="font-bold tracking-tight">بايبلاي</span>
+            <span className="font-bold tracking-tight">بايثونا</span>
           </Link>
 
           <div className="flex items-center gap-2">

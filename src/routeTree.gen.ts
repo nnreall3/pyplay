@@ -9,12 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as PlaygroundRouteImport } from './routes/playground'
 import { Route as ModulesRouteImport } from './routes/modules'
+import { Route as InterviewRouteImport } from './routes/interview'
+import { Route as GlossaryRouteImport } from './routes/glossary'
+import { Route as CheatsheetsRouteImport } from './routes/cheatsheets'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProjectsIdRouteImport } from './routes/projects_.$id'
 import { Route as LessonIdRouteImport } from './routes/lesson.$id'
 
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfileRoute = ProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -30,9 +40,29 @@ const ModulesRoute = ModulesRouteImport.update({
   path: '/modules',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InterviewRoute = InterviewRouteImport.update({
+  id: '/interview',
+  path: '/interview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlossaryRoute = GlossaryRouteImport.update({
+  id: '/glossary',
+  path: '/glossary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheatsheetsRoute = CheatsheetsRouteImport.update({
+  id: '/cheatsheets',
+  path: '/cheatsheets',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsIdRoute = ProjectsIdRouteImport.update({
+  id: '/projects_/$id',
+  path: '/projects/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LessonIdRoute = LessonIdRouteImport.update({
@@ -43,44 +73,102 @@ const LessonIdRoute = LessonIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cheatsheets': typeof CheatsheetsRoute
+  '/glossary': typeof GlossaryRoute
+  '/interview': typeof InterviewRoute
   '/modules': typeof ModulesRoute
   '/playground': typeof PlaygroundRoute
   '/profile': typeof ProfileRoute
+  '/projects': typeof ProjectsRoute
   '/lesson/$id': typeof LessonIdRoute
+  '/projects/$id': typeof ProjectsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cheatsheets': typeof CheatsheetsRoute
+  '/glossary': typeof GlossaryRoute
+  '/interview': typeof InterviewRoute
   '/modules': typeof ModulesRoute
   '/playground': typeof PlaygroundRoute
   '/profile': typeof ProfileRoute
+  '/projects': typeof ProjectsRoute
   '/lesson/$id': typeof LessonIdRoute
+  '/projects/$id': typeof ProjectsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cheatsheets': typeof CheatsheetsRoute
+  '/glossary': typeof GlossaryRoute
+  '/interview': typeof InterviewRoute
   '/modules': typeof ModulesRoute
   '/playground': typeof PlaygroundRoute
   '/profile': typeof ProfileRoute
+  '/projects': typeof ProjectsRoute
   '/lesson/$id': typeof LessonIdRoute
+  '/projects_/$id': typeof ProjectsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/modules' | '/playground' | '/profile' | '/lesson/$id'
+  fullPaths:
+    | '/'
+    | '/cheatsheets'
+    | '/glossary'
+    | '/interview'
+    | '/modules'
+    | '/playground'
+    | '/profile'
+    | '/projects'
+    | '/lesson/$id'
+    | '/projects/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/modules' | '/playground' | '/profile' | '/lesson/$id'
-  id: '__root__' | '/' | '/modules' | '/playground' | '/profile' | '/lesson/$id'
+  to:
+    | '/'
+    | '/cheatsheets'
+    | '/glossary'
+    | '/interview'
+    | '/modules'
+    | '/playground'
+    | '/profile'
+    | '/projects'
+    | '/lesson/$id'
+    | '/projects/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/cheatsheets'
+    | '/glossary'
+    | '/interview'
+    | '/modules'
+    | '/playground'
+    | '/profile'
+    | '/projects'
+    | '/lesson/$id'
+    | '/projects_/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CheatsheetsRoute: typeof CheatsheetsRoute
+  GlossaryRoute: typeof GlossaryRoute
+  InterviewRoute: typeof InterviewRoute
   ModulesRoute: typeof ModulesRoute
   PlaygroundRoute: typeof PlaygroundRoute
   ProfileRoute: typeof ProfileRoute
+  ProjectsRoute: typeof ProjectsRoute
   LessonIdRoute: typeof LessonIdRoute
+  ProjectsIdRoute: typeof ProjectsIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
@@ -102,11 +190,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ModulesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/interview': {
+      id: '/interview'
+      path: '/interview'
+      fullPath: '/interview'
+      preLoaderRoute: typeof InterviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/glossary': {
+      id: '/glossary'
+      path: '/glossary'
+      fullPath: '/glossary'
+      preLoaderRoute: typeof GlossaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cheatsheets': {
+      id: '/cheatsheets'
+      path: '/cheatsheets'
+      fullPath: '/cheatsheets'
+      preLoaderRoute: typeof CheatsheetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects_/$id': {
+      id: '/projects_/$id'
+      path: '/projects/$id'
+      fullPath: '/projects/$id'
+      preLoaderRoute: typeof ProjectsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lesson/$id': {
@@ -121,10 +237,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CheatsheetsRoute: CheatsheetsRoute,
+  GlossaryRoute: GlossaryRoute,
+  InterviewRoute: InterviewRoute,
   ModulesRoute: ModulesRoute,
   PlaygroundRoute: PlaygroundRoute,
   ProfileRoute: ProfileRoute,
+  ProjectsRoute: ProjectsRoute,
   LessonIdRoute: LessonIdRoute,
+  ProjectsIdRoute: ProjectsIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

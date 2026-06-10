@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Flame, Trophy, Sparkles, Target } from "lucide-react";
+import { ArrowLeft, Flame, Trophy, Sparkles, Target, Rocket, BookMarked, MessagesSquare } from "lucide-react";
 import { useProgress } from "@/lib/progress";
 import { ALL_LESSONS, MODULES, TOTAL_LESSONS, TOTAL_XP } from "@/lib/curriculum";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "بايبلاي — الرئيسية" },
+      { title: "بايثونا — الرئيسية" },
       { name: "description", content: "تابع تقدمك في تعلّم بايثون واكسب XP يومياً." },
     ],
   }),
@@ -93,7 +93,33 @@ function Home() {
           })}
         </div>
       </section>
+
+      <section>
+        <h2 className="mb-3 text-lg font-bold">استكشف أكثر</h2>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <QuickLink to="/projects" icon={Rocket} title="مشاريع تطبيقية" sub="٦ مشاريع متدرّجة" />
+          <QuickLink to="/cheatsheets" icon={BookMarked} title="بطاقات مرجعية" sub="مراجعة سريعة" />
+          <QuickLink to="/interview" icon={MessagesSquare} title="أسئلة المقابلات" sub="استعد للوظيفة" />
+        </div>
+      </section>
     </div>
+  );
+}
+
+function QuickLink({ to, icon: Icon, title, sub }: { to: "/projects" | "/cheatsheets" | "/interview"; icon: typeof Trophy; title: string; sub: string }) {
+  return (
+    <Link
+      to={to}
+      className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 shadow-card transition hover:border-primary/50"
+    >
+      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary">
+        <Icon className="h-5 w-5" />
+      </div>
+      <div className="min-w-0">
+        <h3 className="truncate font-bold">{title}</h3>
+        <p className="truncate text-xs text-muted-foreground">{sub}</p>
+      </div>
+    </Link>
   );
 }
 
