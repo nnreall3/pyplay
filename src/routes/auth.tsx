@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Loader2, LogIn, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable/index";
+import { lovable } from "@/integrations/pyplay/index";
 import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/auth")({
