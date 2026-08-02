@@ -1,10 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Lightbulb, Play } from "lucide-react";
-<<<<<<< HEAD
 import { PROJECTS, type Project } from "@/lib/projects";
-=======
-import { PROJECTS } from "@/lib/projects";
->>>>>>> ce5d5dc5811f9da15d9b5c80382cfcd936916ee1
+
 
 export const Route = createFileRoute("/projects_/$id")({
   loader: ({ params }) => {
@@ -36,11 +33,7 @@ export const Route = createFileRoute("/projects_/$id")({
 });
 
 function ProjectDetail() {
-<<<<<<< HEAD
   const p = Route.useLoaderData() as Project;
-=======
-  const p = Route.useLoaderData();
->>>>>>> ce5d5dc5811f9da15d9b5c80382cfcd936916ee1
 
   // Pass the starter code to playground via URL hash (base64).
   const codeHash = typeof window !== "undefined"
