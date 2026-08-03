@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Loader2, LogIn, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/pyplay/index";
+
 import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/auth")({
@@ -36,17 +36,16 @@ function AuthPage() {
   const google = async () => {
     setErr(null);
     setBusy(true);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/auth` },
     });
-    if (result.error) {
+    if (error) {
       setErr("تعذّر تسجيل الدخول عبر Google. حاول مرة أخرى.");
       setBusy(false);
-      return;
     }
-    if (result.redirected) return;
-    navigate({ to: "/profile", replace: true });
   };
+
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
