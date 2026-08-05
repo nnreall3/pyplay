@@ -1,6 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Play, Trash2, Code2, Loader2, Download, Share2, Save, Check, FileCode } from "lucide-react";
+import { Play, Trash2, Code2, Loader2, Download, Share2, Save, Check, FileCode, Sparkles } from "lucide-react";
 import { z } from "zod";
 
 const searchSchema = z.object({
@@ -245,7 +245,15 @@ function Playground() {
             {s.label}
           </button>
         ))}
+        <Link
+          to="/examples"
+          className="flex items-center gap-1 rounded-full bg-primary/15 px-3 py-1.5 text-xs font-bold text-primary hover:bg-primary/25"
+        >
+          <Sparkles className="h-3.5 w-3.5" />
+          مكتبة الأمثلة
+        </Link>
       </div>
+
 
       <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
         <div className="flex items-center justify-between border-b border-border bg-secondary/50 px-3 py-2">

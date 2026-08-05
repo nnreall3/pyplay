@@ -1,18 +1,22 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, BookOpen, Terminal, User, Moon, Sun, Flame, Trophy, Rocket, BookA, LogIn } from "lucide-react";
+import { Home, BookOpen, Terminal, User, Moon, Sun, Flame, Trophy, Rocket, BookA, LogIn, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 import { useTheme } from "@/lib/theme";
 import { useProgress } from "@/lib/progress";
 import { useAuth, avatarUrl, displayName } from "@/lib/auth";
 
 const NAV = [
-  { to: "/", label: "الرئيسية", icon: Home },
-  { to: "/modules", label: "المسارات", icon: BookOpen },
-  { to: "/projects", label: "مشاريع", icon: Rocket },
-  { to: "/playground", label: "المختبر", icon: Terminal },
-  { to: "/glossary", label: "المعجم", icon: BookA },
-  { to: "/profile", label: "حسابي", icon: User },
+  { to: "/", label: "الرئيسية", icon: Home, mobile: true },
+  { to: "/modules", label: "المسارات", icon: BookOpen, mobile: true },
+  { to: "/examples", label: "أمثلة", icon: Sparkles, mobile: true },
+  { to: "/projects", label: "مشاريع", icon: Rocket, mobile: false },
+  { to: "/playground", label: "المختبر", icon: Terminal, mobile: true },
+  { to: "/glossary", label: "المعجم", icon: BookA, mobile: false },
+  { to: "/profile", label: "حسابي", icon: User, mobile: true },
 ];
+
+const MOBILE_NAV = NAV.filter((n) => n.mobile);
+
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { theme, toggle } = useTheme();
@@ -92,7 +96,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       {/* mobile bottom nav */}
       <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 backdrop-blur-xl safe-bottom md:hidden">
         <ul className="mx-auto flex max-w-5xl items-stretch justify-around">
-          {NAV.map((n) => {
+          {MOBILE_NAV.map((n) => {
             const active = n.to === "/" ? path === "/" : path.startsWith(n.to);
             return (
               <li key={n.to} className="flex-1">

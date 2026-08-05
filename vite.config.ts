@@ -7,10 +7,16 @@ import tsConfigPaths from "vite-tsconfig-paths";
 import path from "node:path";
 
 // Standard TanStack Start config (ejected from @lovable.dev/vite-tanstack-config).
-// Nitro builds the server bundle targeting Vercel. The NITRO_PRESET env var
-// (set automatically by Vercel) overrides this, so the same config works locally
-// and in CI without changes.
-const nitroPreset = process.env.NITRO_PRESET ?? "vercel";
+// On Vercel (VERCEL=1 is set automatically) Nitro builds to .vercel/output.
+// Everywhere else (Lovable preview/publish, local builds) it must emit the
+// default dist/ output, otherwise the platform's dist check fails.
+const isVercel = Boolean(process.env.VERCEL);
+const nitroPreset = process.env.NITRO_PRESET ?? (isVercel ? "vercel" : "cloudflare-module");
+const nitroOutput = isVercel
+  ? undefined
+  : { dir: "dist", serverDir: "dist/server", publicDir: "dist/client" };
+
+
 
 export default defineConfig({
   resolve: {
@@ -28,6 +34,6 @@ export default defineConfig({
       server: { entry: "server" },
     }),
     viteReact(),
-    nitro({ preset: nitroPreset }),
+    nitro({ preset: nitroPreset, ...(nitroOutput ? { output: nitroOutput } : {}) }),
   ],
 });

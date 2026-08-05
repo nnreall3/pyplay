@@ -15,6 +15,7 @@ import { Route as PlaygroundRouteImport } from './routes/playground'
 import { Route as ModulesRouteImport } from './routes/modules'
 import { Route as InterviewRouteImport } from './routes/interview'
 import { Route as GlossaryRouteImport } from './routes/glossary'
+import { Route as ExamplesRouteImport } from './routes/examples'
 import { Route as CheatsheetsRouteImport } from './routes/cheatsheets'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -51,6 +52,11 @@ const GlossaryRoute = GlossaryRouteImport.update({
   path: '/glossary',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExamplesRoute = ExamplesRouteImport.update({
+  id: '/examples',
+  path: '/examples',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheatsheetsRoute = CheatsheetsRouteImport.update({
   id: '/cheatsheets',
   path: '/cheatsheets',
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/cheatsheets': typeof CheatsheetsRoute
+  '/examples': typeof ExamplesRoute
   '/glossary': typeof GlossaryRoute
   '/interview': typeof InterviewRoute
   '/modules': typeof ModulesRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/cheatsheets': typeof CheatsheetsRoute
+  '/examples': typeof ExamplesRoute
   '/glossary': typeof GlossaryRoute
   '/interview': typeof InterviewRoute
   '/modules': typeof ModulesRoute
@@ -108,6 +116,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/cheatsheets': typeof CheatsheetsRoute
+  '/examples': typeof ExamplesRoute
   '/glossary': typeof GlossaryRoute
   '/interview': typeof InterviewRoute
   '/modules': typeof ModulesRoute
@@ -123,6 +132,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/cheatsheets'
+    | '/examples'
     | '/glossary'
     | '/interview'
     | '/modules'
@@ -136,6 +146,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/cheatsheets'
+    | '/examples'
     | '/glossary'
     | '/interview'
     | '/modules'
@@ -149,6 +160,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/cheatsheets'
+    | '/examples'
     | '/glossary'
     | '/interview'
     | '/modules'
@@ -163,6 +175,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
   CheatsheetsRoute: typeof CheatsheetsRoute
+  ExamplesRoute: typeof ExamplesRoute
   GlossaryRoute: typeof GlossaryRoute
   InterviewRoute: typeof InterviewRoute
   ModulesRoute: typeof ModulesRoute
@@ -217,6 +230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GlossaryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/examples': {
+      id: '/examples'
+      path: '/examples'
+      fullPath: '/examples'
+      preLoaderRoute: typeof ExamplesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cheatsheets': {
       id: '/cheatsheets'
       path: '/cheatsheets'
@@ -259,6 +279,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   CheatsheetsRoute: CheatsheetsRoute,
+  ExamplesRoute: ExamplesRoute,
   GlossaryRoute: GlossaryRoute,
   InterviewRoute: InterviewRoute,
   ModulesRoute: ModulesRoute,
