@@ -6,10 +6,6 @@ import tailwindcss from "@tailwindcss/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 import path from "node:path";
 
-// Standard TanStack Start config (ejected from @lovable.dev/vite-tanstack-config).
-// On Vercel (VERCEL=1 is set automatically) Nitro builds to .vercel/output.
-// Everywhere else (Lovable preview/publish, local builds) it must emit the
-// default dist/ output, otherwise the platform's dist check fails.
 const isVercel = Boolean(process.env.VERCEL);
 const nitroPreset = process.env.NITRO_PRESET ?? (isVercel ? "vercel" : "cloudflare-module");
 const nitroOutput = isVercel
@@ -29,8 +25,7 @@ export default defineConfig({
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
     tailwindcss(),
     tanstackStart({
-      // Redirect TanStack Start's bundled server entry to src/server.ts
-      // (our SSR error wrapper).
+
       server: { entry: "server" },
     }),
     viteReact(),

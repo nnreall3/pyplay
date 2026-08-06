@@ -20,7 +20,7 @@ export const Route = createFileRoute("/playground")({
   component: Playground,
 });
 
-// Load Pyodide lazily from CDN — full CPython compiled to WebAssembly.
+
 const PYODIDE_VERSION = "0.26.4";
 const PYODIDE_URL = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/`;
 
@@ -277,11 +277,11 @@ function Playground() {
             const ta = e.currentTarget;
             const { selectionStart: s, selectionEnd: en, value: v } = ta;
             const INDENT = "    ";
-            // Tab / Shift+Tab — indent or dedent
+            
             if (e.key === "Tab") {
               e.preventDefault();
               if (s !== en || e.shiftKey) {
-                // Block (de)indent
+                
                 const lineStart = v.lastIndexOf("\n", s - 1) + 1;
                 const before = v.slice(0, lineStart);
                 const block = v.slice(lineStart, en);

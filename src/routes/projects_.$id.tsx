@@ -35,7 +35,7 @@ export const Route = createFileRoute("/projects_/$id")({
 function ProjectDetail() {
   const p = Route.useLoaderData() as Project;
 
-  // Pass the starter code to playground via URL hash (base64).
+ 
   const codeHash = typeof window !== "undefined"
     ? btoa(unescape(encodeURIComponent(p.starter)))
     : "";

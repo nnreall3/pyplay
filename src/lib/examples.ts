@@ -22,7 +22,7 @@ export const EXAMPLE_CATEGORIES = [
 ] as const;
 
 export const EXAMPLES: Example[] = [
-  // ── الأساسيات ────────────────────────────────────────────────
+ 
   {
     id: "fstring",
     title: "تنسيق النصوص f-string",
@@ -30,16 +30,16 @@ export const EXAMPLES: Example[] = [
     category: "الأساسيات",
     level: "مبتدئ",
     emoji: "🧵",
-    code: `name = "سارة"
+    code: `name = "ايمان"
 score = 93.4567
 print(f"مرحباً {name}!")
 print(f"النتيجة: {score:.2f}")      # تقريب لخانتين
 print(f"|{name:>10}|")              # محاذاة لليمين بعرض 10
 print(f"{1234567:,}")               # فواصل آلاف
 print(f"{0.87:.0%}")                # نسبة مئوية`,
-    output: `مرحباً سارة!
+    output: `مرحباً ايمان!
 النتيجة: 93.46
-|      سارة|
+|      ايمان|
 1,234,567
 87%`,
     tip: "استخدم f\"{var=}\" لطباعة اسم المتغير وقيمته معاً أثناء التنقيح.",
