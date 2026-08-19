@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
-import { ALL_LESSONS } from "./curriculum";
+
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "./auth";
 
@@ -25,7 +25,7 @@ interface Ctx {
   progress: Progress;
   isCompleted: (id: string) => boolean;
   isUnlocked: (id: string) => boolean;
-  completeLesson: (id: string, xp: number) => string[]; // returns newly earned badges
+  completeLesson: (id: string, xp: number) => string[]; 
   reset: () => void;
   cloudEnabled: boolean;
   syncState: "idle" | "syncing" | "synced" | "error";
@@ -90,7 +90,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     if (mounted) localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
   }, [progress, mounted]);
 
-  // Pull cloud progress on sign-in and merge it with what's on this device.
+
   useEffect(() => {
     if (!mounted || !user) {
       if (!user) hydratedFor.current = null;
@@ -128,7 +128,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     };
   }, [user, mounted]);
 
-  // Push progress to the cloud (debounced) whenever it changes while signed in.
+
   useEffect(() => {
     if (!mounted || !user || hydratedFor.current !== user.id || syncState === "syncing") return;
     const t = setTimeout(async () => {
@@ -151,12 +151,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
   const isCompleted = (id: string) => !!progress.completed[id];
 
-  const isUnlocked = (id: string) => {
-    const idx = ALL_LESSONS.findIndex((l) => l.id === id);
-    if (idx <= 0) return true;
-    const prev = ALL_LESSONS[idx - 1];
-    return !!progress.completed[prev.id];
-  };
+  const isUnlocked = (_id: string) => true;
+
 
   const completeLesson = (id: string, xp: number) => {
     const newBadges: string[] = [];
